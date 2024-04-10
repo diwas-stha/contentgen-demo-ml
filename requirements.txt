@@ -1,0 +1,10 @@
+fastapi==0.110.1
+html2text
+langchain==0.1.15
+langchain_openai==0.1.2
+pydantic==2.6.4
+python-dotenv==1.0.1
+streamlit==1.32.2
+tiktoken==0.6.0
+unstructured==0.13.2
+unstructured[local-inference]

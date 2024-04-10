@@ -1,6 +1,6 @@
 import os
 from typing import List
-from langchain_community.document_loaders import AsyncHtmlLoader, DirectoryLoader
+from langchain_community.document_loaders import AsyncHtmlLoader, PyPDFDirectoryLoader
 from langchain_community.document_transformers import Html2TextTransformer
 from langchain_openai import ChatOpenAI
 from langchain_text_splitters import CharacterTextSplitter
@@ -107,11 +107,11 @@ async def generate_topics_from_file(file: UploadFile = File(...)) -> List[str]:
         file_path = os.path.join(directory, file.filename)
         with open(file_path, "wb") as f:
             f.write(await file.read())
-        logging.info(f"File saved: {file.filename}")
-        print(f"File saved: {file.filename}")
+        logging.info(f"File saved on {file_path}")
+        print(f"File saved: {file_path}")
 
 
-        loader = DirectoryLoader(directory)
+        loader = PyPDFDirectoryLoader(directory)
         docs = loader.load()
         logging.info(f"file loaded with directory loader")
         print(f"file loaded with directory loader")
@@ -123,7 +123,8 @@ async def generate_topics_from_file(file: UploadFile = File(...)) -> List[str]:
         )
         
         chunks = text_splitter.split_documents(docs)
-        print(chunks)
+        logging.info(f"Chunking of documents completed")
+        print(f"Chunking of documents completed")
         
         # Logic to generate combined summary
         combined_summary = ""
@@ -131,6 +132,7 @@ async def generate_topics_from_file(file: UploadFile = File(...)) -> List[str]:
             summary = context_summarizer_chain.invoke({'context': chunk.page_content})
             combined_summary += summary.content + "\n"
 
+        logging.info("Generated Summaries combined")
         print(combined_summary)
         
         # Logic to generate topics
@@ -144,7 +146,9 @@ async def generate_topics_from_file(file: UploadFile = File(...)) -> List[str]:
         return topics_list
 
     except Exception as e:
+        logging.info(f"Error {e}")
         raise HTTPException(status_code=500, detail=str(e))
+    
 
 
 

@@ -8,3 +8,4 @@ streamlit==1.32.2
 tiktoken==0.6.0
 unstructured==0.13.2
 unstructured[local-inference]
+uvicorn==0.29.0

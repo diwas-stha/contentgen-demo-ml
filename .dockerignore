@@ -1,0 +1,7 @@
+.env
+files
+*__pycache__/
+app.log
+*.pdf
+*.ipynb
+notebooks

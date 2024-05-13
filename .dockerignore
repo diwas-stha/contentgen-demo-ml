@@ -4,4 +4,4 @@ files
 app.log
 *.pdf
 *.ipynb
-notebooks
+faiss_index

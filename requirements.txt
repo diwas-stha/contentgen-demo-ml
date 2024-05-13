@@ -2,6 +2,8 @@ fastapi==0.110.1
 html2text
 langchain==0.1.15
 langchain_openai==0.1.2
+langchain-community==0.0.24
+poppler-utils
 pydantic==2.6.4
 python-dotenv==1.0.1
 streamlit==1.32.2

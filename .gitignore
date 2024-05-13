@@ -3,3 +3,5 @@ files
 *__pycache__/
 app.log
 *.pdf
+*.ipynb
+faiss_index
